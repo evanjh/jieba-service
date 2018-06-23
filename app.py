@@ -12,9 +12,14 @@ jieba.load_userdict('dict/dict.txt.big')
 jieba.analyse.set_idf_path('dict/idf.txt.big')
 jieba.analyse.set_stop_words('dict/stop_words.txt')
 
+
 @app.route('/')
 def index():
-    text = request.args.get('text')
+    if request.method == 'POST':
+        text = request.form.get('text')
+    else:
+        text = request.args.get('text')
+
     seg_list = jieba.cut_for_search(text)
     keywords = []
     for keyword in seg_list:
