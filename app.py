@@ -41,7 +41,7 @@ def index():
 
 
 @app.route('/jianhuang')
-def index():
+def jianhuang():
     global JIANHUANG_LOADED
     if request.method == 'POST':
         path = request.form.get('path')
