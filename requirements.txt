@@ -3,3 +3,4 @@ jieba==0.39
 Keras==2.2.4
 tensorflow==1.11.0
 Pillow==2.2.1
+requests==2.19.1

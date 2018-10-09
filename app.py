@@ -44,9 +44,9 @@ def index():
 def jianhuang():
     global JIANHUANG_LOADED
     if request.method == 'POST':
-        path = request.form.get('path')
+        url = request.form.get('url')
     else:
-        path = request.args.get('path')
+        url = request.args.get('url')
 
     from keras.preprocessing.image import img_to_array, load_img
     from keras.layers.core import Dense, Flatten
@@ -54,6 +54,16 @@ def jianhuang():
     from keras.models import Model
     from keras import optimizers
     import keras as ks
+    import requests
+    resp = requests.get(url)
+    path = None
+    if resp.status_code == 200:
+        filename = url.replace(':large', '').split('/')[4]
+        path = os.path.realpath('images/%s' % (filename))
+        open(path, 'wb').write(resp.content)
+
+    if path is None:
+        return jsonify(weight=str(0))
 
     # input image dimensions
     img_rows, img_cols = 128, 128
@@ -91,4 +101,4 @@ def jianhuang():
     s = model.predict_on_batch(x_img)
     print('Input image is: %s, probability is: %3.3f%%' % (path, 100 * s,))
 
-    return jsonify(weight=str(100 * s[0,0]))
+    return jsonify(weight=str(100 * s[0, 0]))
