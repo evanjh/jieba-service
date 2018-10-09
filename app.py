@@ -91,4 +91,4 @@ def jianhuang():
     s = model.predict_on_batch(x_img)
     print('Input image is: %s, probability is: %3.3f%%' % (path, 100 * s,))
 
-    return jsonify(weight=100 * s)
+    return jsonify(weight=str(100 * s))
