@@ -13,7 +13,7 @@ USER_DICT_LOADED = False
 JIANHUANG_LOADED = False
 
 
-@app.route('/')
+@app.route('/jieba')
 def index():
     global USER_DICT_LOADED
     if request.method == 'POST':
