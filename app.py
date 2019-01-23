@@ -4,6 +4,13 @@ import jieba
 import jieba.analyse
 import sys
 import os
+from keras.preprocessing.image import img_to_array, load_img
+from keras.layers.core import Dense, Flatten
+from keras.layers import Input
+from keras.models import Model
+from keras import optimizers
+import keras as ks
+import requests
 
 sys.path.append('../')
 
@@ -48,13 +55,6 @@ def jianhuang():
     else:
         url = request.args.get('url')
 
-    from keras.preprocessing.image import img_to_array, load_img
-    from keras.layers.core import Dense, Flatten
-    from keras.layers import Input
-    from keras.models import Model
-    from keras import optimizers
-    import keras as ks
-    import requests
     resp = requests.get(url)
     path = None
     if resp.status_code == 200:
