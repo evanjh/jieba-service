@@ -1,1 +1,0 @@
-model/0.12-loss_18epoch_128x128_aug_0.001lr_run0_Xception_128_1493071505.11time.h5 filter=lfs diff=lfs merge=lfs -text
