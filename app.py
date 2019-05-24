@@ -4,12 +4,14 @@ import jieba
 import jieba.analyse
 import sys
 import os
+import requests
 
 sys.path.append('../')
 
 app = Flask(__name__)
 
 USER_DICT_LOADED = False
+
 
 @app.route('/jieba')
 def index():
@@ -36,3 +38,10 @@ def index():
         tags.append(x)
 
     return jsonify(keywords=keywords, tags=tags)
+
+
+@app.route('/proxy')
+def proxy():
+    url = request.args.get('url')
+    r = requests.get(url)
+    return r.text

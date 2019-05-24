@@ -6,5 +6,5 @@ default:
 
 install:
 	python3 -m venv .virtualenv
-	./ve pip install --upgrade pip
-	./ve pip install --upgrade -r requirements.txt
+	./ve pip install --upgrade pip --trusted-host mirrors.aliyun.com -i https://mirrors.aliyun.com/pypi/simple/
+	./ve pip install --upgrade -r requirements.txt --trusted-host mirrors.aliyun.com -i https://mirrors.aliyun.com/pypi/simple/
