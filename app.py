@@ -24,7 +24,7 @@ def index():
     if False == USER_DICT_LOADED:
         jieba.load_userdict('dict/dict.txt.big')
         jieba.load_userdict('dict/freq.dict')
-        jieba.analyse.set_idf_path('dict/idf.txt.big')
+        # jieba.analyse.set_idf_path('dict/idf.txt.big')
         jieba.analyse.set_stop_words('dict/stop_words.txt')
         USER_DICT_LOADED = True
 
