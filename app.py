@@ -28,7 +28,7 @@ def index():
         jieba.analyse.set_stop_words('dict/stop_words.txt')
         USER_DICT_LOADED = True
 
-    seg_list = jieba.cut_for_search(text)
+    seg_list = jieba.cut(text, cut_all=True)
     keywords = []
     for keyword in seg_list:
         if len(keyword) > 1:
