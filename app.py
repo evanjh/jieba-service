@@ -43,9 +43,7 @@ def index():
             desc_keywords.append(keyword)
 
     text = "%s %s" % (title, desc)
-    textrank_tags = []
-    for x, w in jieba.analyse.textrank(text):
-        textrank_tags.append(x)
+    textrank_tags = jieba.analyse.textrank(text)
 
     tfidf_tags = jieba.analyse.extract_tags(text, 20)
 
