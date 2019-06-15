@@ -17,9 +17,11 @@ USER_DICT_LOADED = False
 def index():
     global USER_DICT_LOADED
     if request.method == 'POST':
-        text = request.form.get('text')
+        title = request.form.get('title')
+        desc = request.form.get('desc')
     else:
-        text = request.args.get('text')
+        title = request.args.get('title')
+        desc = request.args.get('desc')
 
     if False == USER_DICT_LOADED:
         jieba.load_userdict('dict/dict.txt.big')
@@ -28,17 +30,33 @@ def index():
         jieba.analyse.set_stop_words('dict/stop_words.txt')
         USER_DICT_LOADED = True
 
-    seg_list = jieba.cut(text, cut_all=True)
-    keywords = []
+    seg_list = jieba.cut(title, cut_all=True)
+    title_keywords = []
     for keyword in seg_list:
         if len(keyword) > 1:
-            keywords.append(keyword)
+            title_keywords.append(keyword)
 
-    tags = []
-    for x, w in jieba.analyse.textrank(text, withWeight=True):
-        tags.append(x)
+    seg_list = jieba.cut(desc, cut_all=True)
+    desc_keywords = []
+    for keyword in seg_list:
+        if len(keyword) > 1:
+            desc_keywords.append(keyword)
 
-    return jsonify(keywords=keywords, tags=tags)
+    text = "%s %s" % (title, desc)
+    textrank_tags = []
+    for x, w in jieba.analyse.textrank(text):
+        textrank_tags.append(x)
+
+    tfidf_tags = []
+    for x, w in jieba.analyse.extract_tags(text, 20):
+        tfidf_tags.append(x)
+
+    return jsonify(
+        title=title_keywords,
+        desc=desc_keywords,
+        textrank=textrank_tags,
+        tfidf=tfidf_tags,
+    )
 
 
 @app.route('/proxy')
