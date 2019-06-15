@@ -26,7 +26,7 @@ def index():
     if False == USER_DICT_LOADED:
         jieba.load_userdict('dict/dict.txt.big')
         jieba.load_userdict('dict/freq.dict')
-        # jieba.analyse.set_idf_path('dict/idf.txt.big')
+        jieba.analyse.set_idf_path('dict/idf.txt.big')
         jieba.analyse.set_stop_words('dict/stop_words.txt')
         USER_DICT_LOADED = True
 
@@ -47,9 +47,7 @@ def index():
     for x, w in jieba.analyse.textrank(text):
         textrank_tags.append(x)
 
-    tfidf_tags = []
-    for x, w in jieba.analyse.extract_tags(text, 20):
-        tfidf_tags.append(x)
+    tfidf_tags = jieba.analyse.extract_tags(text, 20)
 
     return jsonify(
         title=title_keywords,
