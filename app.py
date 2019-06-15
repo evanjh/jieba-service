@@ -45,7 +45,7 @@ def index():
     text = "%s %s" % (title, desc)
     textrank_tags = jieba.analyse.textrank(text)
 
-    tfidf_tags = jieba.analyse.extract_tags(text, 20)
+    tfidf_tags = jieba.analyse.extract_tags(text, 10)
 
     return jsonify(
         title=title_keywords,
