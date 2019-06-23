@@ -34,13 +34,13 @@ def index():
     title_keywords = []
     for keyword in seg_list:
         if len(keyword) > 1:
-            title_keywords.append(keyword.encode('utf-8'))
+            title_keywords.append(keyword)
 
     seg_list = jieba.cut(desc, cut_all=True)
     desc_keywords = []
     for keyword in seg_list:
         if len(keyword) > 1:
-            desc_keywords.append(keyword.encode('utf-8'))
+            desc_keywords.append(keyword)
 
     text = "%s %s" % (title, desc)
     textrank_tags = jieba.analyse.textrank(text)
